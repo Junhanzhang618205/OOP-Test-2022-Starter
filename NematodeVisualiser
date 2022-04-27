@@ -1,0 +1,48 @@
+package ie.tudublin;
+
+import java.util.ArrayList;
+import java.util.Scanner;
+
+import processing.core.PApplet;
+import processing.data.Table;
+import processing.data.TableRow;
+
+public class NematodeVisualiser extends PApplet {
+    private ArrayList<Nematode> nematodes;
+    public void keyPressed() {
+        if (keyCode == LEFT) {
+        }
+    }
+
+
+    public void settings() {
+        size(800, 800);
+    }
+
+    public void setup() {
+        colorMode(HSB);
+        background(0);
+        smooth();
+    }
+
+
+    public void loadNematodes() {
+        nematodes  = new ArrayList<>();
+        Scanner scanner = new Scanner("../data/nematodes.csv");
+        // ignore header
+        scanner.nextLine();
+        while (scanner.hasNextLine()) {
+            String[] row = scanner.nextLine().split(",");
+            String name = row[0];
+            int length = Integer.parseInt(row[1]);
+            boolean hasLimbs = row[2].equals("1");
+            char gender = row[3].charAt(0);
+            boolean hasEyes = row[4].equals("1");
+            nematodes.add(new Nematode(name, length, hasLimbs, gender, hasEyes));
+        }
+    }
+
+
+    public void draw() {
+    }
+}
